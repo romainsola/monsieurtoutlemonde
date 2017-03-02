@@ -19,7 +19,10 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
-    Route::get('/gestion', 'BackendController@index')->name('backend.home');
+    Route::get('/gestion', 'BlogController@index')->name('backend.home');
+    Route::get('/gestion/articles', 'ArticleController@index')->name('backend.article.liste');
+    Route::get('/gestion/articles/{n}', 'ArticleController@index')->name('backend.article.vue');
+    Route::get('/gestion/commentaires', 'CommentaireController@index')->name('backend.commentaire.liste');
 });
 
 Route::get('/home', 'HomeController@index');

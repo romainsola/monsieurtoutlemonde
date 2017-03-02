@@ -13734,3 +13734,12 @@ Main components
     background-size: 114px 29px;
   }
 }
+
+label.category{
+    color:white!important;
+    padding:2px 8px 2px 8px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
