@@ -1,60 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading separator">
-                    <div class="panel-title">Informations sur le blog</div>
-                </div>
-                <div class="panel-body">
-                    <h3>{{ $blog->nom }}</h3>
-                    <i>Créée le {{ $blog->created_at->format('d/m/Y')  }}</i>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                @foreach($articles as $article)
+                    <div class="panel panel-default">
+                        <div class="panel-heading ">
+                            <div class="row">
+                                <div class="col-md-9 col-sm-8">
+                                    <span class="label label-{{ $article->theme->color }}">{{ $article->theme->name }}</span>&nbsp;
+                                    <b>{{ $article->title }}</b><br />
+                                    <small>Créée le {{ $article->created_at->format('d/m/Y') }}</small>
+                                </div>
+                                <div class="col-md-3 col-sm-4">
+                                    <div class="pull-right">
+                                        <a href="{{ route('article.edit', $article) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ route('article.remove', $article) }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            {{ $article->content }}
+                        </div>
+                    </div>
+                @endforeach
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading separator">
-                    <div class="panel-title">Derniers articles publiés</div>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-condensed" id="condensedTable">
-                            <thead>
-                            <tr>
-                                <th style="width:30%">Titre de l'article</th>
-                                <th style="width:30%">Thème</th>
-                                <th style="width:40%">Publiée</th>
-                                <th style="width:40%">Date de création</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach( $articles as $article )
-                                <tr>
-                                    <td class="semi-bold">{{ $article->title }}</h5></td>
-                                    <td>
-                                        <label class="category" style="background-color: {{ $article->theme->color }}">{{  $article->theme->name }}</label>
-                                    </td>
-                                    @if( $article->active == 'O' )
-                                        <td><i class="fa fa-check text-success"></i></td>
-                                    @else
-                                        <td><i class="fa fa-times text-danger"></i></td>
-                                    @endif
-                                    <td class="semi-bold">{{ $article->created_at->format('d/m/Y') }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                    {{ $articles->links() }}
+
+            </div>
+            <div class="col-md-4">
+                <a href="{{ route('article.new') }}" class="btn btn-warning pull-left"><i class="fa fa-pencil-square-o"></i>&nbsp;Ecrire un nouvel article</a>
+                <a href="{{ route('article.new') }}" class="btn btn-default pull-right"><i class="fa fa-cogs"></i>&nbsp;Mes Paramètres</a>
+
+                <div class="panel panel-default" style="margin-top: 50px;">
+                    <div class="panel-heading">Informations sur mon blog</div>
+                    <div class="panel-body">
+                        Contenu
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
+
+    </div>
 @endsection

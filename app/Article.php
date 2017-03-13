@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function theme()
     {
         return $this->hasOne('App\Theme', 'id', 'fk_themes_id');

@@ -19,10 +19,17 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
-    Route::get('/gestion', 'BlogController@index')->name('backend.home');
-    Route::get('/gestion/articles', 'ArticleController@index')->name('backend.article.liste');
-    Route::get('/gestion/articles/{n}', 'ArticleController@index')->name('backend.article.vue');
-    Route::get('/gestion/commentaires', 'CommentaireController@index')->name('backend.commentaire.liste');
+
+
+    Route::get('/gestion', 'ArticleController@index')->name('backend.home');
+
+    Route::prefix('article')->group(function () {
+        Route::get('/new', 'ArticleController@add')->name('article.new');
+        Route::post('/new', 'ArticleController@create');
+        Route::get('/edit/{article}', 'ArticleController@edit')->name('article.edit');
+
+        Route::get('/remove/{article}', 'ArticleController@remove')->name('article.remove');
+    });
 });
 
 Route::get('/home', 'HomeController@index');
