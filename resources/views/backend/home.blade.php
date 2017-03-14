@@ -12,6 +12,12 @@
                                     <span class="label label-{{ $article->theme->color }}">{{ $article->theme->name }}</span>&nbsp;
                                     <b>{{ $article->title }}</b><br />
                                     <small>Créée le {{ $article->created_at->format('d/m/Y') }}</small>
+                                    <br />
+                                    @if($article->active == 'O')
+                                        <small><i class="fa fa-check text-success"></i>&nbsp;En ligne</small>
+                                    @else
+                                        <small><i class="fa fa-times text-danger"></i>&nbsp;Non publiée</small>
+                                    @endif
                                 </div>
                                 <div class="col-md-3 col-sm-4">
                                     <div class="pull-right">

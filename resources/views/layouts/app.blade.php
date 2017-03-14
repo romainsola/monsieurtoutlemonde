@@ -14,7 +14,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
 
-    <!-- Scripts -->
+    @stack('styles')
+
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -43,10 +44,10 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li class="nav-item active">
+                        <li class="nav-item {{ (Route::currentRouteName() == 'backend.home') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('backend.home') }}"><i class="fa fa-home"></i><span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ (Route::currentRouteName() == 'article.new') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('article.new') }}"><i class="fa fa-pencil"></i>&nbsp;</a>
                         </li>
                         <li class="nav-item">
@@ -94,6 +95,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
+    @stack('scripts')
+
 
 </body>
 </html>

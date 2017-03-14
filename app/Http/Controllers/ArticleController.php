@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Theme;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -15,7 +16,8 @@ class ArticleController extends Controller
 
     public function add()
     {
-        return view('backend.article.new');
+        $themes = Theme::all();
+        return view('backend.article.new', compact('themes'));
     }
 
     public function create()
