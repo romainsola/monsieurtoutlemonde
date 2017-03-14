@@ -20,9 +20,22 @@ class ArticleController extends Controller
         return view('backend.article.new', compact('themes'));
     }
 
-    public function create()
+    public function store()
     {
         // Creation de l'article
+        // dd(request()->all());
+
+        Article::create([
+            'title' => request('title'),
+            'content' => request('content'),
+            'active' => request('active'),
+            'image' => 'image',
+            'fk_users_id' => 1,
+            'fk_themes_id' => request('theme'),
+            'fk_blogs_id' => 1
+        ]);
+
+        return redirect(route('backend.home'));
     }
 
     public function edit()
