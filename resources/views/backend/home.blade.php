@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            {{ $article->content }}
+                           {{ $article->content }}
                         </div>
                     </div>
                 @endforeach

@@ -26,9 +26,13 @@ Route::middleware('auth')->group(function () {
     Route::prefix('article')->group(function () {
         Route::get('/new', 'ArticleController@add')->name('article.new');
         Route::post('/new', 'ArticleController@store');
+        //
         Route::get('/edit/{article}', 'ArticleController@edit')->name('article.edit');
-
+        Route::post('/edit/{article}', 'ArticleController@update');
+        //
         Route::get('/remove/{article}', 'ArticleController@remove')->name('article.remove');
+        Route::post('/remove/{article}', 'ArticleController@destroy');
+
     });
 });
 
