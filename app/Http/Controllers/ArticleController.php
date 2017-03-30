@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alexusmai\LaravelPurifier\Purifier;
 use App\Article;
 use App\Theme;
 use Illuminate\Http\Request;
@@ -45,14 +46,17 @@ class ArticleController extends Controller
             'content'  => 'required',
             'active'   => 'required',
         ]);
-        
+
+        // Upload de l'image de couverture
+        $file = $request->file('image');
+        $path = $file->storeAs('public/photos', $file->hashName());
 
         $article = new Article();
         $article->fill([
             'title' => request('title'),
             'content' => request('content'),
             'active' => request('active'),
-            'image' => 'image',
+            'image' => 'photos/'.$file->hashName(),
             'fk_users_id' => 1,
             'fk_themes_id' => request('theme'),
             'fk_blogs_id' => 1
@@ -91,11 +95,15 @@ class ArticleController extends Controller
             'active'   => 'required',
         ]);
 
+        // Upload de l'image de couverture
+        $file = $request->file('image');
+        $path = $file->storeAs('public/photos', $file->hashName());
+
         $article->fill([
             'title' => request('title'),
             'content' => request('content'),
             'active' => request('active'),
-            'image' => 'image',
+            'image' => 'photos/'.$file->hashName(),
             'fk_themes_id' => request('theme'),
         ]);
         $article->save();

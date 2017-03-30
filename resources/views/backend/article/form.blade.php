@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <form method="post" action="{{ URL::full() }}">
+        <form method="post" action="{{ URL::full() }}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-9">

@@ -28,7 +28,12 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                           {{ $article->content }}
+                            @if(is_file('storage/'.$article->image))
+                                <img width="100%" src="{{ asset('storage/'.$article->image) }}" />
+                            @endif
+                            <div style="margin-top:20px;" class="pull-right">
+                                4&nbsp;<i class="fa fa-commenting-o"></i>
+                            </div>
                         </div>
                     </div>
                 @endforeach
